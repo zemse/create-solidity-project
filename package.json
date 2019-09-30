@@ -1,0 +1,21 @@
+{
+  "name": "solidity-project-template",
+  "version": "1.0.0",
+  "description": "Starter template for building smart contracts",
+  "scripts": {
+    "compile": "node compile.js"
+  },
+  "author": {
+    "name": "Soham Zemse",
+    "email": "sohamzemse143@gmail.com",
+    "url": "https://www.linkedin.com/in/zemse/"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "ethers": "^4.0.33",
+    "fs-extra": "8.1.0",
+    "ganache-cli": "6.4.5",
+    "mocha": "^6.1.4",
+    "solc": "0.5.11"
+  }
+}
