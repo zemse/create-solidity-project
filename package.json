@@ -4,7 +4,8 @@
   "description": "Starter template for building smart contracts",
   "scripts": {
     "compile": "node compile.js",
-    "test": "mocha --timeout 30000"
+    "test": "mocha --timeout 30000",
+    "deploy": "node deploy.js"
   },
   "author": {
     "name": "Soham Zemse",
