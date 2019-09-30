@@ -11,11 +11,12 @@ A light template, which is intended to get a Ethereum Smart Contracts Developer 
 
 ## Steps to write your next smart contract with this template
 1. Start a fresh solidity project using this template through https://github.com/zemse/smart-solidity-template/generate.
-2. Delete `SimpleStorage.sol` from `contracts` folder. Create your smart contract file with it's appropriate name, e.g. `Lottery.sol`. Please make sure that you are using the latest version of solidity in your smart contract in the first line `pragma solidity 0.5.11`.
-3. In the project directory, do `node compile.js`. This will compile your contract, show errors or warnings if any and will place the json files into a build folder.
-4. In the `test` folder, you can rename the existing `SimpleStorage.test.js` file by your contract name, e.g. `Lottery.test.js` and refer to the contents for understanding to write tests. Run the tests by doing `npm run test`.
-5. While developing smart contract, it's a good practice to write tests as you implement any new contract code.
-6. If you make a change in smart contract code, and want to see if nothing breaks old functionality, you can hit a one liner `node compile.js && npm run test`, this will simultaneously compile and run your tests.
+2. Clone your project locally to work on it.
+3. Delete `SimpleStorage.sol` from `contracts` folder. Create your smart contract file with it's appropriate name, e.g. `Lottery.sol`. Please make sure that you are using the latest version of solidity in your smart contract in the first line `pragma solidity 0.5.11`.
+4. In the project directory, do `node compile.js`. This will compile your contract, show errors or warnings if any and will place the json files into a build folder.
+5. In the `test` folder, you can rename the existing `SimpleStorage.test.js` file by your contract name, e.g. `Lottery.test.js` and refer to the contents for understanding to write tests. Run the tests by doing `npm run test`.
+6. While developing smart contract, it's a good practice to write tests as you implement any new contract code.
+7. If you make a change in smart contract code, and want to see if nothing breaks old functionality, you can hit a one liner `node compile.js && npm run test`, this will simultaneously compile and run your tests.
 
 ## Steps to deploy contract
 - You can test deployment on testnets like `rinkeby` or `kovan`. For deployment on mainnet use `homestead`, the process would be same as testnet, but deployment time might vary on different networks due to crowdedness.
