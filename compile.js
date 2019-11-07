@@ -42,7 +42,14 @@ console.log('Done');
 let shouldBuild = true;
 
 if (output.errors) {
-  console.error(output.errors);
+  // console.error(output.errors);
+  for(error of output.errors) {
+    console.log('-'.repeat(process.stdout.columns));
+    console.group(error.severity.toUpperCase());
+    console.log(error.formattedMessage);
+    console.groupEnd();
+  }
+  if(Object.values(output.errors).length) console.log('-'.repeat(process.stdout.columns));
   // throw '\nError in compilation please check the contract\n';
   for(error of output.errors) {
     if(error.severity === 'error') {
@@ -59,16 +66,17 @@ if(shouldBuild) {
   fs.removeSync(buildFolderPath);
   fs.ensureDirSync(buildFolderPath);
 
+  let i = 0;
   for (let contractFile in output.contracts) {
-    let i = 0;
     for(let key in output.contracts[contractFile]) {
       //console.log(key, Object.keys(output.contracts[contractFile][key]));
       fs.outputJsonSync(
-        path.resolve(buildFolderPath, `${key}_${i}.json`),
+        path.resolve(buildFolderPath, `${contractFile.split('.')[0]}_${key}.json`),
         output.contracts[contractFile][key]
       );
-      i++;
+
     }
+    i++;
   }
   console.log('Build finished successfully!\n');
 } else {
