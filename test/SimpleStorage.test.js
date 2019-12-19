@@ -13,7 +13,7 @@ const ganache = require('ganache-cli');
 const provider = new ethers.providers.Web3Provider(ganache.provider({ gasLimit: 8000000 }));
 
 /// @dev importing build file
-const simpleStorageJSON = require('../build/SimpleStorage_0.json');
+const simpleStorageJSON = require('../build/SimpleStorage_SimpleStorage.json');
 
 /// @dev initialize global variables
 let accounts, simpleStorageInstance;
