@@ -35,7 +35,7 @@ const input = {
     }
 }
 
-console.log('\nCompiling contracts...');
+console.log('\n'.repeat(process.stdout.rows)+'Compiling contracts...');
 const output = JSON.parse(solc.compile(JSON.stringify(input)));
 console.log('Done');
 
@@ -54,7 +54,7 @@ if (output.errors) {
   for(error of output.errors) {
     if(error.severity === 'error') {
       shouldBuild = false;
-      throw 'Error found';
+      throw 'Error found\n';
       break;
     }
   }
