@@ -1,10 +1,10 @@
 {
   "name": "smart-solidity-template",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Starter template for building smart contracts",
   "scripts": {
     "compile": "node compile.js",
-    "test": "mocha --timeout 30000",
+    "test": "node compile.js && mocha --timeout 30000",
     "deploy": "node deploy.js"
   },
   "author": {
