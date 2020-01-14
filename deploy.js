@@ -1,3 +1,12 @@
+/*
+  Author: Soham Zemse (https://github.com/zemse)
+
+  Using this script, the developer can deploy their contract on testnet, also from the code you can see that it is possible to deploy on mainnet too but still, please use Remix IDE for deploying contracts to mainnet blockchain, you'll thank me later.
+
+  USAGE:
+  node deploy.js <json-file-name-in-build-folder> <network> <privatekey> <constructor-args-if-any>
+*/
+
 const path = require('path');
 const fs = require('fs-extra');
 const ethers = require('ethers');

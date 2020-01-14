@@ -1,3 +1,13 @@
+/*
+  Author: Soham Zemse (https://github.com/zemse)
+
+  This script reads your contracts written in contracts folder and compiles them only if you made any changes, creating a standard JSON output file in the build folder.
+
+  USAGE:
+  node compile.js (only for compiling)
+  npm run test (for compiling + running tests)
+*/
+
 const path = require('path');
 const fs = require('fs-extra');
 const solc = require('solc');
