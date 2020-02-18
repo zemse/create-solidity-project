@@ -1,10 +1,10 @@
-#!/bin/bash 
+#!/bin/bash
 red=`tput setaf 1`
 green=`tput setaf 2`
 reset=`tput sgr0`
 
 if [[ $1 == "" ]]
-	then 
+	then
 	echo "${red}Please pass new project folder name as argument..${reset}"
 	exit 0
 fi
@@ -24,6 +24,10 @@ echo $'Done\n'
 cd $1
 echo "Installing dependencies..."
 npm i
+echo $'\nInitiating Git'
+git init
+git add .
+git commit -m "Initial commit" && echo $'\nGit setup done'
 echo $'\nSmart Solidity Template setup is done successfully!\n'
 
 echo "You are welcome to submit issues or contribute code on GitHub (${green}https://github.com/zemse/smart-solidity-template${reset})."
