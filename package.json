@@ -1,6 +1,6 @@
 {
   "name": "smart-solidity-template",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Starter template for building smart contracts",
   "scripts": {
     "compile": "node compile.js",
