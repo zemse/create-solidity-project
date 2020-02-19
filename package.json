@@ -1,14 +1,14 @@
 {
-  "name": "smart-solidity-template",
+  "name": "create-solidity-project",
   "version": "1.2.1",
-  "description": "Starter template for building smart contracts",
+  "description": "Set up a Solidity Smart Contract Project with one command.",
   "scripts": {
     "compile": "node compile.js",
     "test": "node compile.js && mocha --timeout 30000",
     "deploy": "node deploy.js"
   },
   "bin": {
-    "smart-solidity-template": "setup.sh"
+    "create-solidity-project": "setup.sh"
   },
   "author": {
     "name": "Soham Zemse",
