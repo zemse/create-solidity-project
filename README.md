@@ -20,7 +20,7 @@ _([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7
 - In case you only want your contract to be compiled, then do `npm run compile`.
 - Try implementing a trivial feature to the contract file and writing a test case for it.
 
-## Developing contracts
+## Writing contracts
 - When you are already familiarised with the setup, just delete the `SimpleStorage.sol` file and create your contract file for e.g. `Lottery.sol`.
 - The test file `SimpleStorage.test.js` already contains some useful code structure. You can instead rename this file as per your contract file for e.g. `Lottery.test.js`.
 - Most of the times, writing the test cases before writing contract is preferred for not missing out any condition in smart contract. But in few cases, depending the clarity of conditions for the method you are writing, you might want to write the method first then write test case.
