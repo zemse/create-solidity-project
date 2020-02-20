@@ -19,12 +19,6 @@ const sourceFolderPath = path.resolve(__dirname, 'contracts');
 const buildFolderPath = path.resolve(__dirname, 'build');
 const lastSourceHashFilePath = path.resolve(__dirname, 'sst-config.json');
 
-const getContractSource = contractFileName => {
-  const contractPath = path.resolve(__dirname, 'contracts', contractFileName);
-  const source = fs.readFileSync(contractPath, 'utf8');
-  return source;
-};
-
 let sources = {};
 
 function addSourcesFromThisDirectory(relativePathArray = []) {
@@ -32,7 +26,6 @@ function addSourcesFromThisDirectory(relativePathArray = []) {
   fs.readdirSync(path.resolve(sourceFolderPath, ...relativePathArray)).forEach(childName => {
     if(filesToIgnore[childName]) return;
     const childPathArray = [...relativePathArray, childName];
-    console.log({childPathArray});
     if(fs.lstatSync(path.resolve(sourceFolderPath, ...childPathArray)).isDirectory()) {
       addSourcesFromThisDirectory(childPathArray);
     } else {
