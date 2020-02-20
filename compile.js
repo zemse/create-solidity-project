@@ -13,6 +13,8 @@ const fs = require('fs-extra');
 const solc = require('solc');
 const ethers = require('ethers');
 
+const filesToIgnore = {'.DS_Store': true};
+
 const sourceFolderPath = path.resolve(__dirname, 'contracts');
 const buildFolderPath = path.resolve(__dirname, 'build');
 const lastSourceHashFilePath = path.resolve(__dirname, 'sst-config.json');
@@ -25,15 +27,28 @@ const getContractSource = contractFileName => {
 
 let sources = {};
 
-fs.readdirSync(sourceFolderPath).forEach(contractFileName => {
-  sources = {
-    ...sources,
-    [contractFileName]: {
-      content: getContractSource(contractFileName)
+function addSourcesFromThisDirectory(relativePathArray = []) {
+  const pathArray = [sourceFolderPath, ...relativePathArray];
+  fs.readdirSync(path.resolve(sourceFolderPath, ...relativePathArray)).forEach(childName => {
+    if(filesToIgnore[childName]) return;
+    const childPathArray = [...relativePathArray, childName];
+    console.log({childPathArray});
+    if(fs.lstatSync(path.resolve(sourceFolderPath, ...childPathArray)).isDirectory()) {
+      addSourcesFromThisDirectory(childPathArray);
+    } else {
+      sources = {
+        ...sources,
+        [childPathArray.join('/')]: {
+          content: fs.readFileSync(path.resolve(sourceFolderPath, ...childPathArray), 'utf8')
+        }
+      }
     }
-  }
-});
-// console.log(sources);
+  });
+}
+
+addSourcesFromThisDirectory();
+
+// console.log({sources});
 
 function convertToHex(inputString) {
   var hex = '';
