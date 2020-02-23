@@ -5,21 +5,20 @@
 pragma solidity ^0.6.2;
 
 contract SimpleStorage {
-    string _value;
+  string value;
 
-    event ValueChanged(address indexed author, string oldValue, string newValue);
+  event ValueChanged(address indexed author, string oldValue, string newValue);
 
-    constructor(string memory value) public {
-        emit ValueChanged(msg.sender, _value, value);
-        _value = value;
-    }
+  constructor(string memory _value) public {
+    setValue(_value);
+  }
 
-    function getValue() view public returns (string memory) {
-        return _value;
-    }
+  function getValue() view public returns (string memory) {
+    return value;
+  }
 
-    function setValue(string memory value) public {
-        emit ValueChanged(msg.sender, _value, value);
-        _value = value;
-    }
+  function setValue(string memory _value) public {
+    emit ValueChanged(msg.sender, value, _value);
+    value = _value;
+  }
 }
