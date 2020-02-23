@@ -19,6 +19,7 @@ curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/.
 curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/README.md -o $1/README.md
 curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/compile.js -o $1/compile.js
 curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/deploy.js -o $1/deploy.js
+curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/helpers.js -o $1/helpers.js
 curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/package.json -o $1/package.json
 echo $'Done\n'
 cd $1

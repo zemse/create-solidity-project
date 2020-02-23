@@ -8,6 +8,10 @@
 const assert = require('assert');
 const ethers = require('ethers');
 const ganache = require('ganache-cli');
+const { parseTx } = require('../helpers');
+
+/// @dev when you make this true, the parseTx helper will output transaction gas consumption and logs
+const DEBUG_MODE = false;
 
 /// @dev initialising development blockchain
 const provider = new ethers.providers.Web3Provider(ganache.provider({ gasLimit: 8000000 }));
@@ -73,10 +77,9 @@ describe('Simple Storage Contract', () => {
     it('should change storage value to a new value', async() => {
 
       /// @dev you sign and submit a transaction to local blockchain (ganache) initialized on line 10.
-      const tx = await simpleStorageInstance.functions.setValue('Zemse');
-
-      /// @dev you can wait for transaction to confirm
-      await tx.wait();
+      ///   you can use the parseTx wrapper to parse tx and output gas consumption and logs.
+      ///   use parseTx with non constant methods
+      const receipt = await parseTx(simpleStorageInstance.functions.setValue('hi'), DEBUG_MODE);
 
       /// @dev now get the value at storage
       const currentValue = await simpleStorageInstance.functions.getValue();
@@ -84,7 +87,7 @@ describe('Simple Storage Contract', () => {
       /// @dev then comparing with expectation value
       assert.equal(
         currentValue,
-        'Zemse',
+        'hi',
         'value set must be able to get'
       );
     });
