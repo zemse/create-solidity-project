@@ -16,11 +16,11 @@ curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/c
 mkdir $1/test
 curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/test/SimpleStorage.test.js -o $1/test/SimpleStorage.test.js
 curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/.gitignore -o $1/.gitignore
-curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/README.md -o $1/README.md
+curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/README-for-ethers.md -o $1/README.md
 curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/compile.js -o $1/compile.js
 curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/deploy.js -o $1/deploy.js
 curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/helpers.js -o $1/helpers.js
-curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/package.json -o $1/package.json
+curl -s https://raw.githubusercontent.com/zemse/create-solidity-project/master/package-for-ethers.json -o $1/package.json
 echo $'Done\n'
 cd $1
 echo "Installing dependencies..."
