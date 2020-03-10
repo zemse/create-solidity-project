@@ -9,10 +9,10 @@
   },
   "license": "ISC",
   "dependencies": {
-    "ethers": "^4.0.41",
+    "ethers": "4.0.45",
     "fs-extra": "8.1.0",
     "ganache-cli": "6.4.5",
-    "mocha": "^6.1.4",
-    "solc": "^0.6.2"
+    "mocha": "6.1.4",
+    "solc": "0.6.3"
   }
 }
