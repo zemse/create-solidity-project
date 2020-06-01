@@ -1,6 +1,4 @@
 /*
-  Author: Soham Zemse (https://github.com/zemse)
-
   In this file you should write tests for your smart contract as you progress in developing your smart contract. For reference of Mocha testing framework, you can check out https://devdocs.io/mocha/.
 */
 
