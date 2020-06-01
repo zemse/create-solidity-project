@@ -7,7 +7,9 @@
     "test": "node compile.js && mocha --timeout 30000 test/SimpleStorage.test.js",
     "test-tsc": "node compile.js && mocha -t 30000 -r ts-node/register test-tsc/index.ts",
     "deploy": "node deploy.js",
-    "csp": "csp --typescript -t dd sohsm"
+    "csp": "csp --typescript -t dd sohsm",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "bin": {
     "create-solidity-project": "setup.js",
@@ -27,9 +29,11 @@
     "fs-extra": "8.1.0",
     "ganache-core": "^2.10.2",
     "minimist": "^1.2.5",
-    "mocha": "6.1.4",
+    "mocha": "6.2.1",
     "solc": "^0.6.8",
     "ts-node": "^8.10.1",
-    "typescript": "^3.9.3"
-  }
+    "typescript": "^3.9.3",
+    "snyk": "^1.334.0"
+  },
+  "snyk": true
 }
