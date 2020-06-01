@@ -13,7 +13,7 @@ contract SimpleStorage {
     setValue(_value);
   }
 
-  function getValue() view public returns (string memory) {
+  function getValue() public view returns (string memory) {
     return value;
   }
 
