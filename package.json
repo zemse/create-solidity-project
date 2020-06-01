@@ -6,10 +6,7 @@
     "compile": "node compile.js",
     "test": "node compile.js && mocha --timeout 30000 test/SimpleStorage.test.js",
     "test-tsc": "node compile.js && mocha -t 30000 -r ts-node/register test-tsc/index.ts",
-    "deploy": "node deploy.js",
-    "csp": "csp --typescript -t dd sohsm",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "deploy": "node deploy.js"
   },
   "bin": {
     "create-solidity-project": "setup.js",
