@@ -29,7 +29,7 @@
     "mocha": "6.2.3",
     "solc": "^0.6.8",
     "ts-node": "^8.10.1",
-    "typescript": "^3.9.4",
+    "typescript": "^3.9.5",
     "snyk": "^1.335.0"
   },
   "snyk": true
