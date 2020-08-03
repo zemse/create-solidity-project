@@ -1,0 +1,79 @@
+{
+  "packageJson": {
+    "scripts": {
+      "compile": "node compile.js",
+      "deploy": "node deploy.js",
+      "mocha": "mocha -t 30000 -r ts-node/register test/index.ts",
+      "postinstall": "tsc compile.ts",
+      "test": "npm run compile && npm run mocha",
+      "typechain": "typechain --target ethers-v5 --outDir build/typechain 'build/artifacts/*/*.json'"
+    }
+  },
+  "install": [
+    {
+      "name": "solc",
+      "version": "latest"
+    }
+  ],
+  "install_dev": [
+    {
+      "name": "ethers",
+      "version": "latest"
+    },
+    {
+      "name": "fs-extra",
+      "version": "latest"
+    },
+    {
+      "name": "@types/fs-extra",
+      "version": "latest"
+    },
+    {
+      "name": "mocha",
+      "version": "latest"
+    },
+    {
+      "name": "ganache-core",
+      "version": "latest"
+    },
+    {
+      "name": "@types/mocha",
+      "version": "latest"
+    },
+    {
+      "name": "@types/node",
+      "version": "latest"
+    },
+    {
+      "name": "ts-node",
+      "version": "latest"
+    },
+    {
+      "name": "typescript",
+      "version": "latest"
+    },
+    {
+      "name": "typechain",
+      "version": "latest"
+    },
+    {
+      "name": "@typechain/ethers-v5",
+      "version": "latest"
+    }
+  ],
+  "files": [
+    {
+      "from": "compile.ts"
+    },
+    {
+      "from": "test"
+    },
+    {
+      "from": "README.md"
+    },
+    {
+      "from": "../../contracts",
+      "to": "contracts"
+    }
+  ]
+}

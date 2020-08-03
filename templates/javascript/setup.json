@@ -1,0 +1,54 @@
+{
+  "packageJson": {
+    "scripts": {
+      "compile": "node compile.js",
+      "test": "node compile.js && mocha --timeout 30000 test/SimpleStorage.test.js",
+      "deploy": "node deploy.js"
+    }
+  },
+  "install": [
+    {
+      "name": "solc",
+      "version": "latest"
+    }
+  ],
+  "install_dev": [
+    {
+      "name": "ethers",
+      "version": "latest"
+    },
+    {
+      "name": "fs-extra",
+      "version": "latest"
+    },
+    {
+      "name": "mocha",
+      "version": "latest"
+    },
+    {
+      "name": "ganache-core",
+      "version": "latest"
+    }
+  ],
+  "files": [
+    {
+      "from": "compile.js"
+    },
+    {
+      "from": "deploy.js"
+    },
+    {
+      "from": "helpers.js"
+    },
+    {
+      "from": "test"
+    },
+    {
+      "from": "README.md"
+    },
+    {
+      "from": "../../contracts",
+      "to": "contracts"
+    }
+  ]
+}
