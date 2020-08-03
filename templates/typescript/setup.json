@@ -9,56 +9,66 @@
       "typechain": "typechain --target ethers-v5 --outDir build/typechain 'build/artifacts/*/*.json'"
     }
   },
-  "install": [
+  "packages": [
     {
       "name": "solc",
-      "version": "latest"
-    }
-  ],
-  "install_dev": [
+      "version": "latest",
+      "type": "main"
+    },
     {
       "name": "ethers",
-      "version": "latest"
+      "version": "latest",
+      "type": "dev"
     },
     {
       "name": "fs-extra",
-      "version": "latest"
+      "version": "latest",
+      "type": "dev"
     },
     {
       "name": "@types/fs-extra",
-      "version": "latest"
+      "version": "latest",
+      "type": "dev"
     },
     {
       "name": "mocha",
-      "version": "latest"
+      "version": "latest",
+      "type": "dev"
     },
     {
       "name": "ganache-core",
-      "version": "latest"
+      "version": "latest",
+      "type": "dev"
     },
     {
       "name": "@types/mocha",
-      "version": "latest"
+      "version": "latest",
+      "type": "dev"
     },
     {
       "name": "@types/node",
-      "version": "latest"
+      "version": "latest",
+      "type": "dev"
     },
     {
       "name": "ts-node",
-      "version": "latest"
+      "version": "latest",
+      "type": "dev"
     },
     {
       "name": "typescript",
-      "version": "latest"
+      "version": "latest",
+      "type": "dev"
     },
     {
       "name": "typechain",
-      "version": "latest"
+      "version": "latest",
+      "type": "dev"
     },
     {
       "name": "@typechain/ethers-v5",
-      "version": "latest"
+      "version": "latest",
+      "type": "dev"
     }
   ],
   "files": [

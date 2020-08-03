@@ -6,28 +6,32 @@
       "deploy": "node deploy.js"
     }
   },
-  "install": [
+
+  "packages": [
     {
       "name": "solc",
-      "version": "latest"
-    }
-  ],
-  "install_dev": [
-    {
-      "name": "ethers",
-      "version": "latest"
+      "version": "latest",
+      "type": "main"
     },
     {
-      "name": "fs-extra",
-      "version": "latest"
+      "name": "ethers",
+      "version": "latest",
+      "type": "dev"
     },
     {
       "name": "mocha",
-      "version": "latest"
+      "version": "latest",
+      "type": "dev"
     },
     {
       "name": "ganache-core",
-      "version": "latest"
+      "version": "latest",
+      "type": "dev"
+    },
+    {
+      "name": "fs-extra",
+      "version": "latest",
+      "type": "dev"
     }
   ],
   "files": [
