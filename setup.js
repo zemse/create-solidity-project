@@ -10,119 +10,87 @@ if (!argv._[0]) {
   throw new Error('Please pass directory name');
 }
 
-let selected_template = 'javascript';
-
-if (argv.typescript || argv.tsc || argv.t) {
-  console.log(
-    '\nInitiating',
-    'Create Solidity Project'.cyan.underline,
-    'with',
-    'TypeScript'.cyan.underline,
-    '...'
-  );
-  selected_template = 'typescript';
-  // require('./setup-tsc');
-} else {
-  console.log('\nInitiating', 'Create Solidity Project'.cyan.underline, '...');
-  // require('./setup-normal');
-}
-
-setupProject(argv._[0], selected_template);
-
-function setupProject(name, templateName) {
-  const template = require(`./templates/${templateName}/setup.json`);
-
-  console.log(
-    `\nCreating`,
-    `${name}`.green,
-    `directory and installing files...`
-  );
-  fs.mkdirSync(path.resolve(process.cwd(), name));
-
-  // [
-  //   { from: ['compile.js'] },
-  //   { from: ['deploy.js'] },
-  //   { from: ['helpers.js'] },
-  //   { from: ['.gitignore'] },
-  //   { from: ['test', 'SimpleStorage.test.js'] },
-  //   { from: ['contracts', 'SimpleStorage.sol'] },
-  //   { from: ['README-for-normal.md'], to: ['README.md'] },
-  // ]
-
-  template.files.forEach((filePath) => {
-    const from = filePath.from.split('/');
-    const to = filePath.to ? filePath.to.split('/') : from;
-
-    fs.copySync(
-      path.resolve(__dirname, 'templates', templateName, ...from),
-      path.resolve(process.cwd(), name, ...to)
-    );
-  });
-
-  const packageJson = {
-    name,
-    ...template.packageJson,
-  };
-
-  fs.writeFileSync(
-    path.resolve(process.cwd(), name, 'package.json'),
-    JSON.stringify(packageJson, null, 2),
-    { encoding: 'utf8' }
-  );
-
-  const { execSync } = require('child_process');
-  console.log('\nInstalling dependencies...');
-  execSync(
-    `npm i ${template.install.map((p) => `${p.name}@${p.version}`).join(' ')}`,
-    {
-      cwd: path.resolve(process.cwd(), name),
-      stdio: 'ignore',
-    }
-  );
-  execSync(
-    `npm i --save-dev ${template.install_dev
-      .map((p) => `${p.name}@${p.version}`)
-      .join(' ')}`,
-    {
-      cwd: path.resolve(process.cwd(), name),
-      stdio: 'ignore',
-    }
-  );
-
-  if (packageJson.scripts.postinstall) {
-    execSync(`${packageJson.scripts.postinstall}`, {
-      cwd: path.resolve(process.cwd(), name),
-      stdio: 'ignore',
-    });
+let templateName = 'JavaScript';
+if (argv.template || argv.t) {
+  if (['typescript', 'tsc'].includes(argv.template || argv.t)) {
+    templateName = 'TypeScript';
+  } else {
+    throw new Error(`Unknown template: ${argv.template || argv.t}.`);
   }
-
-  console.log('\nInitiating Git Repository...');
-  execSync(
-    `cd ${name} && git init && git add . && git commit -m "Initial commit"`,
-    () => {}
-  );
-  console.log('Done!');
-
-  console.log(`\nStart with changing the directory:`);
-  console.log(`cd ${name}`.green);
-  console.log(`npm test\n`.green);
-  console.log('You can check README file for additional information.');
-  console.log('Happy BUIDLing!\n');
 }
 
-// function recurrsiveCopy(src, destination) {
-//   const stat = fs.lstatSync(src);
-//   if (stat.isDirectory()) {
-//     fs.readdirSync(src).forEach((child) =>
-//       copyFile(path.resolve(src, child), path.resolve(destination, child))
-//     );
-//   } else if (stat.isFile()) {
-//     fs.copyFile(
-//       path.resolve(__dirname, ...from),
-//       path.resolve(process.cwd(), name, ...to),
-//       (err) => {
-//         if (err) throw err;
-//       }
-//     );
-//   }
-// }
+const name = argv._[0];
+const initiating_text = [
+  '\nInitiating',
+  'Create Solidity Project'.cyan.underline,
+];
+if (templateName !== 'JavaScript') {
+  initiating_text.push('with', templateName.cyan.underline);
+}
+console.log(...initiating_text, '...');
+
+templateName = templateName.toLowerCase();
+const template = require(`./templates/${templateName}/setup.json`);
+
+console.log(`\nCreating`, `${name}`.green, `directory and installing files...`);
+fs.mkdirSync(path.resolve(process.cwd(), name));
+
+template.files.forEach((filePath) => {
+  const from = filePath.from.split('/');
+  const to = filePath.to ? filePath.to.split('/') : from;
+
+  fs.copySync(
+    path.resolve(__dirname, 'templates', templateName, ...from),
+    path.resolve(process.cwd(), name, ...to)
+  );
+});
+
+const packageJson = {
+  name,
+  ...template.packageJson,
+};
+
+fs.writeFileSync(
+  path.resolve(process.cwd(), name, 'package.json'),
+  JSON.stringify(packageJson, null, 2),
+  { encoding: 'utf8' }
+);
+
+const { execSync } = require('child_process');
+console.log('\nInstalling dependencies...');
+execSync(
+  `npm i ${template.install.map((p) => `${p.name}@${p.version}`).join(' ')}`,
+  {
+    cwd: path.resolve(process.cwd(), name),
+    stdio: 'ignore',
+  }
+);
+execSync(
+  `npm i --save-dev ${template.install_dev
+    .map((p) => `${p.name}@${p.version}`)
+    .join(' ')}`,
+  {
+    cwd: path.resolve(process.cwd(), name),
+    stdio: 'ignore',
+  }
+);
+
+if (packageJson.scripts.postinstall) {
+  execSync(`${packageJson.scripts.postinstall}`, {
+    cwd: path.resolve(process.cwd(), name),
+    stdio: 'ignore',
+  });
+}
+
+console.log('\nInitiating Git Repository...');
+execSync(
+  `cd ${name} && git init && git add . && git commit -m "Initial commit"`,
+  () => {}
+);
+console.log('Done!');
+
+console.log(`\nStart with changing the directory:`);
+console.log(`cd ${name}`.green);
+console.log(`npm test\n`.green);
+console.log('You can check README file for additional information.');
+console.log('Happy BUIDLing!\n');
