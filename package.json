@@ -27,7 +27,7 @@
     "ganache-core": "^2.10.2",
     "minimist": "^1.2.5",
     "mocha": "6.2.3",
-    "solc": "^0.6.9",
+    "solc": "^0.6.11",
     "ts-node": "^8.10.1",
     "typescript": "^3.9.4",
     "snyk": "^1.336.0"
