@@ -53,6 +53,10 @@
     {
       "from": "../../contracts",
       "to": "contracts"
+    },
+    {
+      "from": "../../.gitignore",
+      "to": ".gitignore"
     }
   ]
 }
