@@ -6,14 +6,17 @@
 import assert from 'assert';
 import { ethers } from 'ethers';
 
-/// @dev when you make this true, the parseTx helper will output transaction gas consumption and logs
-const DEBUG_MODE = false;
+/// @dev Use this to see logs or internal transactions, pass an ethers tx object / promise
+import { parseReceipt } from '../utils';
 
-/// @dev importing build file
-const simpleStorageJSON = require('../../build/SimpleStorage_SimpleStorage.json');
+/// @dev import contract factory
+import { SimpleStorageFactory } from '../../build/typechain/SimpleStorageFactory';
+
+/// @dev importing contract typescript interface for type intellisense
+import { SimpleStorage } from '../../build/typechain/SimpleStorage';
 
 /// @dev initialize file level global variables, you can also register it global.ts if needed across files.
-let simpleStorageInstance: ethers.Contract;
+let simpleStorageInstance: SimpleStorage;
 
 /// @dev this is another test case collection
 export const SimpleStorageContract = () =>
@@ -23,9 +26,7 @@ export const SimpleStorageContract = () =>
       /// @dev this is first test case of this collection
       it('deploys Simple Storage contract from first account with initial storage: Hello World', async () => {
         /// @dev you create a contract factory for deploying contract. Refer to ethers.js documentation at https://docs.ethers.io/ethers.js/html/
-        const SimpleStorageContractFactory = new ethers.ContractFactory(
-          simpleStorageJSON.abi,
-          simpleStorageJSON.evm.bytecode.object,
+        const SimpleStorageContractFactory = new SimpleStorageFactory(
           global.provider.getSigner(global.accounts[0])
         );
         simpleStorageInstance = await SimpleStorageContractFactory.deploy(
@@ -41,7 +42,7 @@ export const SimpleStorageContract = () =>
       /// @dev this is second test case of this collection
       it('value should be set properly while deploying', async () => {
         /// @dev you access the value at storage with ethers.js library of our custom contract method called getValue defined in contracts/SimpleStorage.sol
-        const currentValue = await simpleStorageInstance.functions.getValue();
+        const currentValue = await simpleStorageInstance.getValue();
 
         /// @dev then you compare it with your expectation value
         assert.equal(
@@ -58,10 +59,10 @@ export const SimpleStorageContract = () =>
         /// @dev you sign and submit a transaction to local blockchain (ganache) initialized on line 10.
         ///   you can use the parseTx wrapper to parse tx and output gas consumption and logs.
         ///   use parseTx with non constant methods
-        const receipt = await simpleStorageInstance.functions.setValue('hi');
+        const tx = await simpleStorageInstance.setValue('hi');
 
         /// @dev now get the value at storage
-        const currentValue = await simpleStorageInstance.functions.getValue();
+        const currentValue = await simpleStorageInstance.getValue();
 
         /// @dev then comparing with expectation value
         assert.equal(currentValue, 'hi', 'value set must be able to get');
