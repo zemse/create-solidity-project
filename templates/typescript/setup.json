@@ -92,6 +92,10 @@
     {
       "from": "../../.gitignore",
       "to": ".gitignore"
+    },
+    {
+      "from": "../../.gitattributes",
+      "to": ".gitattributes"
     }
   ]
 }
