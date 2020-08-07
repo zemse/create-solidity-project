@@ -56,3 +56,7 @@ _([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7
 - This project uses [ethers.js](https://github.com/ethers-io/ethers.js), a Complete Ethereum library with wallet implementation in JavaScript. This makes it a great alternative to [web3.js](https://github.com/ethereum/web3.js). You will want to keep ethers.js [documentation](https://docs.ethers.io/ethers.js/html/) handy.
 - You can customise to a specific `solc` version by doing `npm i solc@0.5.10`, but it's not recommended. Note: `solc@0.4.*` will not work with this template, because it has a different compile.js structure. It is recommended that you upgrade your smart contract code to be able to be compiled by a `solc@0.5.*` and above compiler. You can check out [breaking changes](https://solidity.readthedocs.io/en/v0.5.0/050-breaking-changes.html) in `0.5.*` and [breaking changes](https://solidity.readthedocs.io/en/v0.6.0/060-breaking-changes.html) in `0.6.*`and upgrade your smart contracts accordingly.
 - If you wish to use `web3.js` instead, you can do it by uninstalling `ethers.js` using `npm uninstall ethers`, then you can install `web3.js` using `npm i web3`. Then you will have to change the tests files.
+
+## Acknowledgement
+
+This tool is heavyly inspired from [facebook/create-react-app](https://github.com/facebook/create-react-app).
