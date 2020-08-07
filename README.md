@@ -1,6 +1,6 @@
 # Create Solidity Project
 
-A light template, which is intended to get a Ethereum Smart Contracts Developer quickly started into developing Bug-free Smart Contracts using a single command.
+Generates a raw dependency project for developing smart contracts.
 
 Create Solidity Project is tested on macOS and Linux.<br />
 If something doesn't work, [file an issue](https://github.com/zemse/create-solidity-project/issues/new).
@@ -10,46 +10,133 @@ If something doesn't work, [file an issue](https://github.com/zemse/create-solid
 ### Setting up a normal project
 
 ```sh
-$ npx create-solidity-project lottery-contract
-
-or
-
 $ npx csp lottery-contract
 ```
 
 ### Setting up a typescript project
 
 ```sh
-$ npx create-solidity-project lottery-contract --template typescript
-
-or
-
 $ npx csp lottery-contract --template typescript
 ```
 
 _([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))_
 
-## Getting familiarised with the setup
+## Why use raw dependency?
 
-- When you set up a fresh project, do `npm run test`. It compiles the default contract and runs test file.
-- If you do `npm run test` again, it won't compile the contracts again since you did not do any changes and directly proceed to running the test cases to show output.
-- You can make changes to the default contract file and try `npm run test` again. It will now compile contracts as expected.
-- Read the file in the test folder and you can make changes to it and do `npm run test`.
-- In case you only want your contract to be compiled, then do `npm run compile`.
-- Try implementing a trivial feature to the contract file and writing a test case for it.
+1. Using an umbrella package of dependencies in which bugs are found and fixed more frequently results in receiving **late updates** in case a particular internal dependency breaks and needs update.
+2. Umbrella package tools abstract inner functionality away from devs to make it smooth, but this results in **lesser learnings** of blockchain internals for beginner devs.
 
-## Writing contracts
+## Should I use raw dependency project?
 
-- When you are already familiarised with the setup, just delete the `SimpleStorage.sol` file and create your contract file for e.g. `Lottery.sol`.
-- The test file `SimpleStorage.test.js` already contains some useful code structure. You can instead rename this file as per your contract file for e.g. `Lottery.test.js`.
-- Most of the times, writing the test cases before writing contract is preferred for not missing out any condition in smart contract. But in few cases, depending the clarity of conditions for the method you are writing, you might want to write the method first then write test case.
+In the current phase of blockchain development, most of the tools are well tested for basic features but complex utils might have bugs since less devs have used them. So umbrella package tools are comfortable for projects that use basic and well used features but one can give a thought if they want to work with raw dependencies.
 
-## Deploying contracts
+Android OS users can relate with this, updates released directly from Google are available instantly to users in Pixel or Motorola, while for brands like Samsung releases a mod at a later date. It's just a matter of preference ;)
 
-- You can test deployment on testnets like `rinkeby` or `kovan`. For deployment on mainnet, it is suggested to use Remix IDE for now.
-- To deploy all compiled contracts, do `node deploy.js deployall rinkeby 0xa6779f54dc1e9959b81f448769450b97a9fcb2b41c53d4b2ab50e5055a170ce7`.
-- To deploy a specific contract, write it's JSON file name instead of deployall flag, e.g. `node deploy.js SimpleStorage_SimpleStorage.json rinkeby 0xa6779f54dc1e9959b81f448769450b97a9fcb2b41c53d4b2ab50e5055a170ce7`.
-- If the contract requires constructor arguments, you can pass it by adding them after the command, e.g. `node deploy.js SimpleStorage_SimpleStorage.json rinkeby 0xa6779f54dc1e9959b81f448769450b97a9fcb2b41c53d4b2ab50e5055a170ce7 "hello world"`.
+## Javascript project
+
+Dependencies:
+
+- `solc`
+- `ethers`
+- `mocha`
+- `ganache-core`
+- `fs-extra`
+
+File structure:
+
+```js
+├── build // gets generated after: npm run compile
+│   └── SimpleStorage.json
+│
+├── contracts
+│   └── SimpleStorage.sol
+│
+├── test
+│   └── SimpleStorage.test.js
+│
+├── node_modules
+├── compile.js // compiles if contract files changed
+├── helpers.js
+├── .gitignore
+├── .gitattributes
+├── README.md
+└── package.json
+```
+
+Scripts:
+
+- `npm run compile`: compiles your contracts if they haven't already.
+- `npm run test`: compiles contracts and runs the test scripts.
+
+## Typescript project
+
+Dependencies:
+
+- `solc`
+- `ethers`
+- `mocha`
+- `ganache-core`
+- `fs-extra`
+- `ts-node`
+- `typescript`
+- `typechain`
+- `@typechain/ethers-v5`
+- `@types/node`
+- `@types/mocha`
+- `@types/fs-extra`
+
+File structure:
+
+```ts
+├── build // gets generated after: npm run compile
+│   ├── artifacts
+│   │   └── SimpleStorage.json // compiled contract
+│   └── typechain
+│       ├── SimpleStorage.d.ts // contract type definatinons
+│       └── SimpleStorageFactory.ts // contract factory (bytecode && abi)
+│
+├── contracts
+│   └── SimpleStorage.sol
+│
+├── test
+│   ├── suites
+│   │   ├── index.ts // test import file
+│   │   ├── Ganache.test.ts
+│   │   └── SimpleStorage.test.ts
+│   ├── utils
+│   │   ├── index.ts
+│   │   └── parseReceipt.ts // parses logs & contract internal txs
+│   ├── global.ts // declare global vars (common stuff across tests)
+│   ├── server.ts // start ganache server
+│   └── index.ts // grand test import file
+│
+├── node_modules
+├── compile.ts // compiles if contract files changed
+├── .gitignore
+├── .gitattributes
+├── README.md
+└── package.json
+```
+
+Scripts:
+
+- `npm run compile` => compiles your contracts if they haven't already.
+- `npm run test` => compiles contracts and runs the test scripts.
+- `npm run test:debug` => runs tests in debug mode, this activates `parseReceipt` util to console log the contract events emitted and internal transactions executed.
+
+## Getting Started
+
+- `npx csp new-project-name --template tsc`.
+- Start by editing `contracts/SimpleStorage.sol` and `test/SimpleStorage.test.js` file. You can try adding methods to contract and access them using `simpleStorageInstance.methodName()` in test file.
+
+### Using parseReceipts to display the logs emitted and internal tx during the tests
+
+```ts
+// prints logs and internal txs if any occurred in DEBUG MODE
+await parseReceipt(simpleStorageInstance.methodThatEmitsLogsOrInternalTxs());
+```
+
+To run tests in debug mode: `npm run test:debug`.
 
 ## More details
 
@@ -59,4 +146,4 @@ _([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7
 
 ## Acknowledgement
 
-This tool is heavyly inspired from [facebook/create-react-app](https://github.com/facebook/create-react-app).
+This tool is heavily inspired from [facebook/create-react-app](https://github.com/facebook/create-react-app). Creators of this project are very much thankful to `create-react-app`'s creators and contributors.
