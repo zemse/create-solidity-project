@@ -107,7 +107,7 @@ if (
   }
 
   const output: SolcOutput = JSON.parse(solc.compile(JSON.stringify(input)));
-  console.log('Done');
+  console.log('Contracts compiled succcessfully!');
 
   let shouldBuild = true;
 
@@ -162,5 +162,5 @@ if (
 
   console.log('Running TypeChain...');
   execSync('npm run typechain');
-  console.log('Done\n');
+  console.log('Type defination files generated successfully!\n');
 }
