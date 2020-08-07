@@ -3,6 +3,7 @@
     "scripts": {
       "compile": "node compile.js",
       "test": "node compile.js && mocha --timeout 30000 test/SimpleStorage.test.js",
+      "test:debug": "DEBUG=true npm run test",
       "deploy": "node deploy.js"
     }
   },
