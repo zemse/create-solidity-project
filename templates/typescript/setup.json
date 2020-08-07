@@ -7,7 +7,7 @@
       "postinstall": "tsc compile.ts",
       "test": "npm run compile && npm run mocha",
       "test:debug": "DEBUG=true npm run test",
-      "typechain": "typechain --target ethers-v5 --outDir build/typechain 'build/artifacts/*/*.json'"
+      "typechain": "typechain --target ethers-v5 --outDir build/typechain 'build/artifacts/**.json'"
     }
   },
   "packages": [
