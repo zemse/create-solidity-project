@@ -94,7 +94,7 @@ template.packages.forEach((package, i) => {
 process.stdout.write(`Installed ${packageNames.join(', ')}.\n`);
 
 if (packageJson.scripts.postinstall) {
-  execSyncSilent(`${packageJson.scripts.postinstall}`);
+  execSyncSilent(`npm run postinstall`);
 }
 
 process.stdout.write(`Initiating Git Repository...`);
