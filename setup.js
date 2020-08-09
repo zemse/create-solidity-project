@@ -15,7 +15,9 @@ if (argv.template || argv.t) {
   if (['typescript', 'tsc'].includes(argv.template || argv.t)) {
     templateName = 'TypeScript';
   } else {
-    throw new Error(`Unknown template: ${argv.template || argv.t}.`);
+    throw new Error(
+      `Unknown template: ${argv.template || argv.t}. Did you mean typescript?`
+    );
   }
 }
 
