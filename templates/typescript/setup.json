@@ -91,10 +91,11 @@
       "to": "tsconfig.json"
     },
     {
-      "from": ".gitignore"
+      "from": "gitignore",
+      "to": ".gitignore"
     },
     {
-      "from": "../../.gitattributes",
+      "from": "gitattributes",
       "to": ".gitattributes"
     }
   ]

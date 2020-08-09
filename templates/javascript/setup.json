@@ -56,11 +56,11 @@
       "to": "contracts"
     },
     {
-      "from": "../../.gitignore",
+      "from": "gitignore",
       "to": ".gitignore"
     },
     {
-      "from": "../../.gitattributes",
+      "from": "gitattributes",
       "to": ".gitattributes"
     }
   ]
