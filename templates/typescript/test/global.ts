@@ -1,10 +1,10 @@
 import { ethers } from 'ethers';
-import { GanacheServer } from './interface';
+import ganache from 'ganache-core';
 
 declare global {
   namespace NodeJS {
     interface Global {
-      server: GanacheServer;
+      server: ganache.Server;
       provider: ethers.providers.JsonRpcProvider;
       accounts: string[];
     }

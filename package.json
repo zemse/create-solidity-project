@@ -1,6 +1,6 @@
 {
   "name": "create-solidity-project",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Set up a raw dependency Solidity Smart Contract Project with one command.",
   "scripts": {
     "compile": "node compile.js",
