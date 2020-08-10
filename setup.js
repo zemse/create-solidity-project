@@ -85,7 +85,7 @@ template.packages.forEach((package, i) => {
   process.stdout.write(text);
   execSyncSilent(
     `npm i ${package.name}@${package.version}${
-      package.name === 'dev' ? ' --save--dev' : ''
+      package.type === 'dev' ? ' --save-dev' : ''
     }`
   );
   process.stdout.clearLine(0);
