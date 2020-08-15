@@ -21,16 +21,18 @@ $ npx create-solidity-project project-name --template typescript
 
 _([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))_
 
-## Why use raw dependency?
+## Why should one use raw dependencies instead of frameworks?
 
-1. Using an umbrella package of dependencies in which bugs are found and fixed more frequently results in receiving **late updates** in case a particular internal dependency breaks and needs update.
-2. Umbrella package tools abstract inner functionality away from devs to make it smooth, but this results in **lesser learnings** of blockchain internals for beginner devs.
+1. In the current phase of blockchain development, most of the tools are well tested for basic features but complex utils might have bugs since less devs might have used them. Using a framework, with dependencies in which bugs are found and fixed more frequently results in receiving **late updates** in case a particular internal dependency breaks and needs update. Android OS users can relate with this, updates released directly from Google are available instantly to users in Pixel or Motorola, while for brands like Samsung releases OS with mod at after a delay. It's just a matter of choice of techies ;)
+2. Frameworks abstract inner functionality away from devs to make it smooth, but this results in **lesser learnings** of blockchain internals for beginner devs.
 
-## Should I use raw dependency project?
+## Things to consider
 
-In the current phase of blockchain development, most of the tools are well tested for basic features but complex utils might have bugs since less devs have used them. So umbrella package tools are comfortable for projects that use basic and well used features but one can give a thought if they want to work with raw dependencies.
+**`create-solidity-project` is not a framework**, it only copys basic files and installs raw dependencies, after that you are on your own. You will need to refer documentation of the particular dependency (links mentioned in created project's README) for any further hacking in your project. If you are a learner and want to hack into internals your workflow, you can give this a try. If you have any questions, you can shoot them to [me](https://github.com/zemse).
 
-Android OS users can relate with this, updates released directly from Google are available instantly to users in Pixel or Motorola, while for brands like Samsung releases a mod at a later date. It's just a matter of preference ;)
+If you are instead looking for abstraction (easy tasks become easier), this tool is NOT for that. Using some frameworks can be ideal for this requirement. Some of them: [Truffle](https://github.com/trufflesuite/truffle), [Waffle](https://github.com/EthWorks/Waffle).
+
+If you are familiar with `create-react-app`, using smart contract frameworks can be similar to relying on magic done by `react-scripts` while few developers prefer to use with raw dependencies (with `npm run eject`) so they can hack into it.
 
 ## Javascript project
 
