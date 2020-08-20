@@ -21,6 +21,10 @@ $ npx create-solidity-project project-name --template typescript
 
 _([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))_
 
+#### Known Issues
+
+- The typescript project has problems on Windows OS while generating types for smart contract ([ethereum-ts/TypeChain#271](https://github.com/ethereum-ts/TypeChain/issues/271)).
+
 ## Why should one use raw dependencies instead of frameworks?
 
 1. In the current phase of blockchain development, most of the tools are well tested for basic features but complex utils might have bugs since less devs might have used them. Using a framework, with dependencies in which bugs are found and fixed more frequently results in receiving **late updates** in case a particular internal dependency breaks and needs update. Android OS users can relate with this, updates released directly from Google are available instantly to users in Pixel or Motorola, while for brands like Samsung releases OS with mod at after a delay. It's just a matter of choice of techies ;)
