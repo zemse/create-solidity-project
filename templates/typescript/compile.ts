@@ -10,6 +10,10 @@ import {
 } from 'fs-extra';
 import { execSync } from 'child_process';
 import { ethers } from 'ethers';
+import { tsGenerator } from 'ts-generator'
+import { TypeChain } from 'typechain/dist/TypeChain'
+
+
 const solc: { compile(input: string): string } = require('solc');
 
 const filesToIgnore: { [key: string]: boolean } = { '.DS_Store': true };
@@ -17,6 +21,23 @@ const buildFolderPath = resolve(__dirname, 'build', 'artifacts');
 const lastSourceHashFilePath = resolve(__dirname, 'sst-config.json');
 
 let sources = {};
+// ts generator for windows 
+async function tsGenerate() {
+  const cwd = process.cwd()
+
+  await tsGenerator(
+    { cwd },
+    new TypeChain({
+      cwd,
+      rawConfig: {
+        files: 'build/**/*.json',
+        outDir: 'build/typechain',
+        target: 'ethers-v5',
+      },
+    }),
+  )
+}
+
 
 function addSourcesFromThisDirectory(
   sourceFolderPath: string,
@@ -135,6 +156,7 @@ if (
     console.log('\nBuilding please wait...');
 
     removeSync(buildFolderPath);
+    
     ensureDirSync(buildFolderPath);
 
     let i = 0;
@@ -161,6 +183,8 @@ if (
   outputJsonSync(resolve(lastSourceHashFilePath), { sourceHash });
 
   console.log('Running TypeChain...');
+   tsGenerate().catch(console.error);
+
   execSync('npm run typechain');
   console.log('Type defination files generated successfully!\n');
 }
