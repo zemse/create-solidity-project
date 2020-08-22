@@ -13,8 +13,10 @@ if (!argv._[0]) {
 
 let templateName = 'JavaScript';
 if (argv.template || argv.t) {
-  if (['typescript', 'tsc'].includes(argv.template || argv.t)) {
+  if (['typescript', 'tsc', 'ts'].includes(argv.template || argv.t)) {
     templateName = 'TypeScript';
+  } else if (['javascript', 'js'].includes(argv.template || argv.t)) {
+    templateName = 'JavaScript';
   } else {
     throw new Error(
       `Unknown template: ${argv.template || argv.t}. Did you mean typescript?`
