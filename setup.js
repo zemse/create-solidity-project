@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const path = require('path');
 const fs = require('fs-extra');
+const readline = require('readline');
 require('colors');
 
 var argv = require('minimist')(process.argv.slice(2));
@@ -57,8 +58,8 @@ fs.writeFileSync(
   JSON.stringify(packageJson, null, 2),
   { encoding: 'utf8' }
 );
-process.stdout.clearLine(0);
-process.stdout.cursorTo(0);
+readline.clearLine(process.stdout);
+readline.cursorTo(process.stdout, 0);
 process.stdout.write(`Created ${name.green} directory and installed files.\n`);
 
 const { execSync } = require('child_process');
@@ -88,8 +89,8 @@ template.packages.forEach((package, i) => {
       package.type === 'dev' ? ' --save-dev' : ''
     }`
   );
-  process.stdout.clearLine(0);
-  process.stdout.cursorTo(0);
+  readline.clearLine(process.stdout);
+  readline.cursorTo(process.stdout, 0);
   packageNames[i] = packageNames[i].green;
 });
 
@@ -101,8 +102,8 @@ if (packageJson.scripts.postinstall) {
 
 process.stdout.write(`Initiating Git Repository...`);
 execSyncSilent(`git init && git add . && git commit -m "Initial commit"`);
-process.stdout.clearLine(0);
-process.stdout.cursorTo(0);
+readline.clearLine(process.stdout);
+readline.cursorTo(process.stdout, 0);
 process.stdout.write(`Initialized Git Repository.\n`);
 
 console.log(`\nStart with changing the directory:`);
