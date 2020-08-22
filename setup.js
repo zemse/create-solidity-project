@@ -103,10 +103,19 @@ if (packageJson.scripts.postinstall) {
 }
 
 process.stdout.write(`Initiating Git Repository...`);
-execSyncSilent(`git init && git add . && git commit -m "Initial commit"`);
+let isGitSuccess = true;
+try {
+  execSyncSilent(`git init && git add . && git commit -m "Initial commit"`);
+} catch {
+  isGitSuccess = false;
+}
 readline.clearLine(process.stdout);
 readline.cursorTo(process.stdout, 0);
-process.stdout.write(`Initialized Git Repository.\n`);
+process.stdout.write(
+  isGitSuccess
+    ? `Initialized Git Repository.\n`
+    : `Git initializaiton failed. Please try it manually.`
+);
 
 console.log(`\nStart with changing the directory:`);
 console.log(`cd ${name}`.green);
