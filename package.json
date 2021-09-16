@@ -24,10 +24,10 @@
     "colors": "^1.4.0",
     "fs-extra": "8.1.0",
     "minimist": "^1.2.5",
-    "mocha": "6.2.3",
+    "mocha": "8.3.0",
     "ts-node": "^8.10.1",
     "typescript": "^3.9.4",
-    "snyk": "^1.336.0"
+    "snyk": "^1.465.0"
   },
   "snyk": true
 }
